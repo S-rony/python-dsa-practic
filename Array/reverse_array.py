@@ -15,19 +15,20 @@ def reverse(lis):
 l = [23,45,6,3,4]
 reverse(l)
 
+
 ##revise
 arr = [23,45,6,3,4]
 
 left = 0
 right = len(arr) - 1
 temp = 0
-for i in range(len(arr)-1):
-    while left <= right:
-        temp = arr[left]
-        arr[left] = arr[right]
-        arr[right] = temp
-        left += 1
-        right -= 1
+
+while left <= right:
+    temp = arr[left]
+    arr[left] = arr[right]
+    arr[right] = temp
+    left += 1
+    right -= 1
 print(arr)
 
 
