@@ -5,28 +5,30 @@ class ListNode:
 
 
 class Solution:
-    def removeEveryKthNode(self, head: "ListNode | None", k: int) -> "ListNode | None":
-        temp = head
-        prev = temp
-        position = 1
-        while temp is not None:
-            if k == position:
-                prev.next = temp.next
-                temp = prev
-                temp = temp.next
-                position = 1
+    def removeEveryKthNode(self, head: ListNode | None, k: int) -> ListNode | None:
+        if k == 1:
+            return None
+
+        dummy = ListNode(0)
+        dummy.next = head
+
+        prev = dummy
+        curr = head
+        pos = 1
+
+        while curr:
+            if pos % k == 0:
+                prev.next = curr.next
             else:
-                prev = temp
-                temp = temp.next
-                position += 1
+                prev = curr
 
+            curr = curr.next
+            pos += 1
 
-
-        return None
+        return dummy.next
 
 
 def build_linked_list(values):
-    """Helper: turn [1,2,3] into a linked list, return the head."""
     dummy = ListNode()
     tail = dummy
 
@@ -37,7 +39,17 @@ def build_linked_list(values):
     return dummy.next
 
 
+def print_linked_list(head):
+    while head:
+        print(head.val)
+        head = head.next
+    print("None")
+
+
 if __name__ == "__main__":
     head = build_linked_list([1, 2, 3, 4, 5])
+
     sol = Solution()
-    sol.removeEveryKthNode(head, 2)
+    new_head = sol.removeEveryKthNode(head, 2)
+
+    print_linked_list(new_head)
