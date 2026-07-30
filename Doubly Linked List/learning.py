@@ -38,7 +38,8 @@ class DoublyLL:
             t = t.next
         temp = Node(value)
         temp.next = t.next
-        t.next.prev = temp.next
+        if t.next is not None:  # ✅ guard against crash
+            t.next.prev = temp  # ✅ fix self-reference bug
         t.next = temp
         temp.prev = t
 
@@ -56,7 +57,8 @@ class DoublyLL:
         t = self.head
         if t.data == value:
             self.head = t.next
-            self.head.prev = None
+            if self.head is not None:
+                self.head.prev = None
             return
         while t.next is not None:
             if t.data == value:
@@ -66,14 +68,16 @@ class DoublyLL:
             t = t.next
         if t.data == value:
             t.prev.next = None
+            return
 
 
 obj = DoublyLL()
 obj.insert_at_beg(5)
+obj.insert_at_beg(10)
 obj.insert_at_end(10)
 obj.insert_at_end(20)
 obj.insert_at_end(30)
 obj.insert_at_end(40)
-obj.deletion_doubly_ll(40)
+obj.deletion_doubly_ll(30)
 obj.insert_at_mid(50,20)
 obj.print_doubly_ll()
